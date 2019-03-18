@@ -9,9 +9,51 @@ $("button").on("click", function(event){ // this button function should be chang
         method: "GET"
     }).then(function(response) {
         var data = response._embedded.events;
-        for (var i = 0; i < data.length; i++) {
-            console.log(data[i].name);
-
-      }
+       eventsResult(data);
+       console.log(data);
+   
     })
 })
+
+function eventsResult (results) {
+    if (results === "undefined") {
+        $("#display").text("No Results");
+    }
+    for (var i = 0; i < results.length; i++) {
+
+        var eventObject = {
+             name: results[i].name,
+             date: results[i].dates.start.localDate,
+             time: results[i].dates.start.localTime,
+             link: results[i].url,
+             image: results[i].images[0].url,
+             city: results[i]._embedded.venues[0].city.name,
+             state: results[i]._embedded.venues[0].state.stateCode,
+             zip: results[i]._embedded.venues[0].postalCode
+        };
+
+        
+        var name = $("<p>").html(eventObject.name);
+        var date = $("<p>").html(eventObject.date);
+        var city = $("<p>").html(eventObject.city + ", " + eventObject.state);
+        var image = $("<img>").attr("src", eventObject.image);
+
+        var eventDiv = $("<div>");
+        var eventDisplay = $("#display");
+            eventDisplay.prepend(eventDiv);
+            eventDiv.append(image);
+            eventDiv.append(name);
+            eventDiv.append(date);
+            eventDiv.append(city);
+            
+      eventInfo(eventDiv, eventObject);      
+    }
+}
+
+function eventInfo(div, info) {
+    div.on("click", function() {
+        console.log("has been clicked");
+        console.log(info);
+
+    });
+}
