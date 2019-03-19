@@ -1,4 +1,4 @@
-$("button").on("click", function(event){ // this button function should be changed to an id
+$("#search-button").on("click", function(event){ 
     event.preventDefault();
     
     var searchTerm = $("#search").val().trim();
@@ -8,17 +8,20 @@ $("button").on("click", function(event){ // this button function should be chang
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        var data = response._embedded.events;
-       eventsResult(data);
-       console.log(data);
+        console.log(response);
+        if (response.page.totalElements === 0) {
+             $("#display").text("No Result");
+
+        } else {
+            var data = response._embedded.events;
+            eventsResult(data);
+            console.log(data);
+        }
    
     })
 })
 
 function eventsResult (results) {
-    if (results === "undefined") {
-        $("#display").text("No Results");
-    }
     for (var i = 0; i < results.length; i++) {
 
         var eventObject = {
@@ -29,7 +32,8 @@ function eventsResult (results) {
              image: results[i].images[0].url,
              city: results[i]._embedded.venues[0].city.name,
              state: results[i]._embedded.venues[0].state.stateCode,
-             zip: results[i]._embedded.venues[0].postalCode
+             zip: results[i]._embedded.venues[0].postalCode,
+             info: results[i].info
         };
 
         
@@ -37,6 +41,7 @@ function eventsResult (results) {
         var date = $("<p>").html(eventObject.date);
         var city = $("<p>").html(eventObject.city + ", " + eventObject.state);
         var image = $("<img>").attr("src", eventObject.image);
+        var info = $("<p>").html(eventObject.info);
 
         var eventDiv = $("<div>");
         var eventDisplay = $("#display");
@@ -45,6 +50,7 @@ function eventsResult (results) {
             eventDiv.append(name);
             eventDiv.append(date);
             eventDiv.append(city);
+            eventDiv.append(info);
             
       eventInfo(eventDiv, eventObject);      
     }
