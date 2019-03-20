@@ -1,4 +1,5 @@
-$("button").on("click", function(event){ // this button function should be changed to an id
+// TICETMASTER API CALL
+$("#search-button").on("click", function(event){ 
     event.preventDefault();
     
     var searchTerm = $("#search").val().trim();
@@ -8,17 +9,24 @@ $("button").on("click", function(event){ // this button function should be chang
         url: queryURL,
         method: "GET"
     }).then(function(response) {
-        var data = response._embedded.events;
-        for (var i = 0; i < data.length; i++) {
-            console.log(data[i].name);
+        console.log(response);
+        if (response.page.totalElements === 0) {
+             $("#display").text("No Result");
 
-      }
+        } else {
+            var data = response._embedded.events;
+            eventsResult(data);
+            console.log(data);
+        }
+   
     })
 })
-
+// CALL GETS PASSED INTO THIS SEARCH RESULTS FUNCTION
+// THE OBJECT IS "event" LONGITUDE AND LATITUDE "event.long, event.lang"
 function eventsResult (results) {
     for (var i = 0; i < results.length; i++) {
 
+// THIS IS THE OBJECT
         var event = {
              name: results[i].name,
              date: results[i].dates.start.localDate,
