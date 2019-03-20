@@ -24,7 +24,7 @@ $("#search-button").on("click", function(event){
 function eventsResult (results) {
     for (var i = 0; i < results.length; i++) {
 
-        var eventObject = {
+        var event = {
              name: results[i].name,
              date: results[i].dates.start.localDate,
              time: results[i].dates.start.localTime,
@@ -35,13 +35,12 @@ function eventsResult (results) {
              zip: results[i]._embedded.venues[0].postalCode,
              info: results[i].info
         };
-
         
-        var name = $("<p>").html(eventObject.name);
-        var date = $("<p>").html(eventObject.date);
-        var city = $("<p>").html(eventObject.city + ", " + eventObject.state);
-        var image = $("<img>").attr("src", eventObject.image);
-        var info = $("<p>").html(eventObject.info);
+        var name = $("<p>").html(event.name);
+        var date = $("<p>").html(event.date);
+        var city = $("<p>").html(event.city + ", " + event.state);
+        var image = $("<img>").attr("src", event.image);
+        var info = $("<p>").html(event.info);
 
         var eventDiv = $("<div>");
         var eventDisplay = $("#display");
@@ -52,14 +51,14 @@ function eventsResult (results) {
             eventDiv.append(city);
             eventDiv.append(info);
             
-      eventInfo(eventDiv, eventObject);      
+      eventInfo(eventDiv, event);      
     }
 }
 
-function eventInfo(div, info) {
-    div.on("click", function() {
-        console.log("has been clicked");
-        console.log(info);
+// function eventInfo(div, event) {
+//     div.on("click", function() {
+//         window.location = "eventpage.html";
+//         var eventDiv = $("<div>")
+//     });
+// }
 
-    });
-}
