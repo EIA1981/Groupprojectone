@@ -15,7 +15,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet"> 
 
-  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
 
 
   <!-- Style to fix the issue of text extending past card length -->
@@ -108,14 +108,6 @@
       </div>
     </div>    
 
-
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-image: url(http://misioncorazonjoven.weebly.com/uploads/2/6/6/3/26636856/1393209765.jpg); background-size: cover; opacity: 0.5;">
-      <h1 class="text-center">
-        <strong>Concert Concierge</strong>
-      </h1>
-    </div>
-
     <!-- Row for searching events -->
     <div class="row">
       <div class="col-sm-12">
@@ -124,25 +116,18 @@
         <div class="card">
           <div class="card-header">
             <strong>
-              <i style="font-family: 'Roboto', sans-serif;"></i> Who do you want to see in concert?</strong>
+              <i style="font-family: 'Roboto', sans-serif;"></i> Click the buttons to see hotels, restaurants and bars near the venue.</strong>
           </div>
           <div class="card-body">
 
             <!-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
-              <!-- Here we create the text box for capturing the search term-->
-              <div class="form-group">
-               
-                <input type="text" class="form-control" placeholder="Search by artist here" id="search-term">
-              </div>
-
               <!-- Search button -->
-              <button type="submit" class="btn btn-default" id="run-search">
-                <i class="fa fa-search"></i> Search</button>
-              <button class="btn btn-default" id="clear-all">
-                <i class="fa fa-trash"></i> Clear Results</button>
-
+              <button type="submit" class="btn btn-default" id="list-hotels">
+                <i class="fa fa-hotel"></i> Hotels</button>
+              <button class="btn btn-default" id="list-restaurants">
+                <i class="fa fa-cutlery"></i> <i class="fa fa-glass"></i>  Restaurants</button>
             </form>
         
           </div>
@@ -157,9 +142,9 @@
         <div class="card">
 
           <!-- This is where Robert's code should connect -->
-          <div class="card-header" class="d-flex align-content-center flex-wrap;">
+          <div class="card-header">
             <strong>
-              <i style="font-family: 'Roboto', sans-serif;"></i> Upcoming Events</strong>
+              <i style="font-family: 'Roboto', sans-serif;"></i> Results</strong>
           </div>
 
           <!-- This main card will hold results -->
@@ -170,64 +155,7 @@
     </div>
 
 
-    <!-- In this section we show highlighted events for the week  -->
-
-    <div class="jumbotron" style="background-color:rgb(229, 250, 138); font-family: 'Roboto', sans-serif; text-align: center; font-weight: normal; padding-top:20px;">
-        <h3 class="display-5" style="font-weight:normal; color:rgb(59, 59, 59); text-transform: uppercase; font-family: 'Oswald', sans-serif;">Now trending</h3>
-        <p class="lead">
-
-          </p>
-        <hr class="my-4">
-
-      <!-- Carousel with captions for highlighted events (3 slides total)  -->
-
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/images/metallica.jpg" class="d-block w-100" alt="metallica">
-              <div class="carousel-caption d-none d-md-block">
-                  <h2>Metallica, May 3</h5>
-                  <p>Valdebebas, Madrid, Spain</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-              <img src="assets/images/chris-stapleton.jpg" class="d-block w-100" alt="chris-stapleton">
-              <div class="carousel-caption d-none d-md-block">
-                  <h2>Chris Stapleton, March 30</h5>
-                  <p>Atlanta, GA, U.S.A.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-              <img src="assets/images/The_Black_Keys.jpg" class="d-block w-100" alt="The_Black_Keys">
-              <div class="carousel-caption d-none d-md-block">
-                  <h2>The Black Keys, November 17</h5>
-                  <p>Temecula, CA, U.S.A.</p>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <img src="LadyGaga.jpg" class="d-block w-100" alt="Lady-Gaga">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Lady Gaga, May 30</h5>
-                    <p>Las Vegas, Nevada, U.S.A.</p>
-                  </div>
-              </div>
-
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-
-
-          </div>
-        
-      </div>
+  
 
     <!-- Footer Region -->
     <div class="row">
@@ -236,11 +164,8 @@
         <hr>
         <h5 class="text-center" style="color:white;">
         
-      <small>©2019 Concert Concierge, Inc. All rights reserved. By continuing past this page, you agree to our 
-          Terms of Use.</small>
+      <small>©2019 Concert Concierge, Inc. All rights reserved.</small>
         </h5>
-
-        
 
       </div>
     </div>

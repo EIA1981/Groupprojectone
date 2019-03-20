@@ -1,0 +1,80 @@
+.card-body a {
+  word-break: break-all;
+}
+
+.articleHeadline {
+  line-height: 1.5;
+}
+
+h1 {
+  color:white; 
+  font-family: 'Oswald', sans-serif; 
+  font-size:84pt;
+  font-weight:normal;
+  text-transform: uppercase;
+  
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font: 18px 
+  font-family: 'Roboto', sans-serif;
+}
+
+.bg {
+/* The image used */
+  background-color: black;
+
+/* Full height */
+  height: 100%; 
+
+/* Center and scale the image/background */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.nav-link.disabled {
+  color: white;
+}
+
+.nav-link.active {
+  color: blue;
+}
+
+.jumbotron {
+  height: 
+  
+}
+
+.btn.btn-primary {
+  background: black;
+  color: white;
+  font-family: 'Roboto', sans-serif; 
+}
+
+.btn.btn-secondary {
+  background: rgb(95, 95, 95);
+  color: white;
+  font-family: 'Roboto', sans-serif; 
+}
+
+.btn.btn-default {
+  background: black;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.card-header {
+  background:lightyellow;
+  font-size: 18pt;
+  font-weight: lighter;
+
+}
+
+.card-body {
+  background:lightyellow;
+}
+
