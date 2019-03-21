@@ -1,0 +1,7 @@
+.selected-show {
+    border: 1px solid red;
+}
+.show-wrap {
+    display:inline-block;
+    border:1px solid #ccc;
+}

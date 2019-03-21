@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--This test environment for running this code for the Hotel, Food, and Drink module for the  selected tour date includes the css and js files on lines 11, 46, and 47 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scriible API Test Env</title>
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/H-F-D.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="bands-wraps">
+            <form id="band-search-form">
+                <div class="form-group">
+                    <label for="brand-name">Search a Band By Name:</label>
+                    <input type="text" class="form-control" id="brand-name" required placeholder="band name">
+                </div>
+                <button type="submit" class="btn btn-default" id="search-band">Submit</button>
+            </form>
+            <div id="band-results"></div>
+        </div>
+        <div id="hotel-wrap" class="col-lg-6 col-sm-12">
+            <h3>Hotel</h3>
+
+            <div class="data-dump"></div>
+        </div>
+        <div id="food-wrap" class="col-lg-6 col-sm-12">
+            <h3>Food</h3>
+            <div class="data-dump"></div>
+        </div>
+        <div id="drink-wrap" class="col-lg-6 col-sm-12">
+            <h3>Drink</h3>
+            <div class="data-dump"></div>
+        </div>
+    </div>
+    <!-- script files live here -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="assets/javascript/keys.js"></script>
+    <script src="assets/javascript/H-F-D.js"></script>
+</body>
+</html>
