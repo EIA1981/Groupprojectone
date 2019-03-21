@@ -1,8 +1,9 @@
-
 $(document).ready(function() {
 
+//THIS FUNCTIN IS FOR THE DETAILS PAGE BUT A LOG WILL BE IN ANY PAGE'S CONSOLE
+    detailsPage();
 
-// TICETMASTER API CALL
+    // TICETMASTER API CALL
 $("#run-search").on("click", function(event){ 
     event.preventDefault();
     
@@ -26,7 +27,9 @@ $("#run-search").on("click", function(event){
     })
 });
 
+// SET THIS AS GLOBAL BUT NOT SURE WHY
 var eventObject;
+
 // CALL GETS PASSED INTO THIS SEARCH RESULTS FUNCTION
 function eventsResult (results) {
 // LOOP RUNS FOR NUMBER OF SEARCH RESULTS
@@ -65,45 +68,67 @@ function eventsResult (results) {
             eventDiv.append(date);
             eventDiv.append(city);
             eventDiv.append(info);
-            
+
+// SELECT AN EVENT
       eventInfo(eventDiv, eventObject);      
     }
 };
 
+//THIS FUNCTION PASSES THE INFO FROM THE SELECTED EVENT AND PUTS THE INFO INTO LOCAL STORAGE - "INFO" WAS TOO BIG TO STORE
 function eventInfo(div, data) {
     div.on("click", function() {
-    eventObject = data;
+    var eventChoice = data;
+    localStorage.setItem("event-name", eventChoice.name);
+    localStorage.setItem("event-date", eventChoice.date);
+    localStorage.setItem("event-time", eventChoice.time);
+    localStorage.setItem("event-image", eventChoice.image);
+    localStorage.setItem("event-link", eventChoice.link);
+    localStorage.setItem("event-city", eventChoice.city);
+    localStorage.setItem("event-state", eventChoice.state);
+    localStorage.setItem("event-zip", eventChoice.zip);
+    localStorage.setItem("event-lat", eventChoice.lat);
+    localStorage.setItem("event-long", eventChoice.long);
+    // localStorage.setItem("event-info", eventChoice.info);
+    
     window.location = "details_page.html";
 })
 };
 
-// ignore for now....
+// THIS FUNCTION WAS CALLED ON DOCUMENT READY BUT WILL ONLY SHOW ON "details_page.html"
+// THIS WILL GET STORED EVENT DATA AND PUT HTML ONTO "details_page.html" IN A DIV ID "event-display"
 function detailsPage() {
-    console.log(eventObject);
-}
+    var eventChoice = {
+        name: localStorage.getItem("event-name"),
+        date: localStorage.getItem("event-date"),
+        time: localStorage.getItem("event-time"),
+        image: localStorage.getItem("event-image"),
+        link: localStorage.getItem("event-link"),
+        city: localStorage.getItem("event-city"),
+        state: localStorage.getItem("event-state"),
+        zip: localStorage.getItem("event-zip"),
+        lat: localStorage.getItem("event-lat"),
+        long: localStorage.getItem("event-long"),
+        // info: localStorage.getItem("event-info"),
+    };
 
-// also ignore this... 
-function holdThis() {
-    $( document ).on( "load", function(){
-        console.log(eventObject);
+    console.log(eventChoice);
 
-        
-        var name = $("<p>").html(event.name);
-        var date = $("<p>").html(event.date);
-        var city = $("<p>").html(event.city + ", " + event.state);
-        var image = $("<img>").attr("src", event.image);
-        var info = $("<p>").html(event.info);
-        
-        var eventDiv = $("<div>");
-        var eventDisplay = $("#display");
-        eventDisplay.prepend(eventDiv);
-        eventDiv.append(image);
-        eventDiv.append(name);
-        eventDiv.append(date);
-        eventDiv.append(city);
-        eventDiv.append(info);
-        
-    });
+    var eventDisplay = $("#event-display");
+    var name = $("<p>").html(eventChoice.name);
+    var date = $("<p>").html(eventChoice.date);
+    var city = $("<p>").html(eventChoice.city + ", " + eventChoice.state);
+    var image = $("<img>").attr("src", eventChoice.image);
+    // var info = $("<p>").html(eventChoice.info);
+    var link = $("<a>").attr("href", eventChoice.link);
+
+    var eventLink = link.text("Get Tickets")
+
+    eventDisplay.append(image);
+    eventDisplay.append(name);
+    eventDisplay.append(date);
+    eventDisplay.append(city);
+    // eventDisplay.append(info);
+    eventDisplay.append(eventLink);
 }
 
 })
