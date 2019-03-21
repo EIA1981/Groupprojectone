@@ -18,7 +18,7 @@ h1 {
 body {
   height: 100%;
   margin: 0;
-  font: 18px 
+  font: 18px; 
   font-family: 'Roboto', sans-serif;
 }
 
@@ -43,10 +43,10 @@ body {
   color: blue;
 }
 
-.jumbotron {
+/* .jumbotron {
   height: 
   
-}
+} */
 
 .btn.btn-primary {
   background: black;
