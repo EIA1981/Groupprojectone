@@ -3,11 +3,14 @@ $(document).ready(function() {
 //THIS FUNCTIN IS FOR THE DETAILS PAGE BUT A LOG WILL BE IN ANY PAGE'S CONSOLE
     detailsPage();
 
-    // TICETMASTER API CALL
 $("#run-search").on("click", function(event){ 
     event.preventDefault();
     
     var searchTerm = $("#search-term").val().trim();
+    eventSearch(searchTerm);
+});
+    // TICETMASTER API CALL
+function eventSearch (searchTerm) {
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events?keyword=" + searchTerm + "&apikey=qDmaWBTfNnhcNqUaYnYfuEl5K1xVPlxR&countryCode=US";
     
     $.ajax({
@@ -15,17 +18,21 @@ $("#run-search").on("click", function(event){
         method: "GET"
     }).then(function(response) {
         console.log(response);
-        if (response.page.totalElements === 0) {
-             $("#display").text("No Result");
-
-        } else {
-            var data = response._embedded.events;
-            eventsResult(data);
-            console.log(data);
-        }
-   
+        eventResponse(response);
     })
-});
+
+}
+// this puts back a "No Result" if response is null
+function eventResponse (response) {
+    if (response.page.totalElements === 0) {
+        $("#display").text("No Result");
+
+   } else {
+       var data = response._embedded.events;
+       eventsResult(data);
+       console.log(data);
+   }
+}
 
 // SET THIS AS GLOBAL BUT NOT SURE WHY
 var eventObject;
@@ -52,6 +59,7 @@ function eventsResult (results) {
         };
         
         // THESES VARIABLE SET SEARCH DATA TO HTML ELEMENTS
+        // tried to make this it's own function but couldn't get it to work
         var name = $("<p>").html(eventObject.name);
         var date = $("<p>").html(eventObject.date);
         var city = $("<p>").html(eventObject.city + ", " + eventObject.state);
@@ -73,6 +81,7 @@ function eventsResult (results) {
       eventInfo(eventDiv, eventObject);      
     }
 };
+
 
 //THIS FUNCTION PASSES THE INFO FROM THE SELECTED EVENT AND PUTS THE INFO INTO LOCAL STORAGE - "INFO" WAS TOO BIG TO STORE
 function eventInfo(div, data) {
