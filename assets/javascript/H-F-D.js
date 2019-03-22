@@ -1,111 +1,178 @@
-// ROBERT --> see note on line 47  for passing global variable with longitude and latitude variables to my code to bring back results of the foursquare results for hotel, food, and drink
-
 $(document).ready(function(){
-
-    // user inputs a band name - jQuery short version - including preventDefault
-    $('#search-band').on('click', function(e){
-        e.preventDefault();
-        // normalize input - jQuery short version
-        var bandName = $('#brand-name').val().toLowerCase().trim();
-            // search for venues where band is playing
-        searchBand(bandName);
-            
-    })
-    // Passing "bandname" and app_id value
-    function searchBand(bandName){
-        var queryURL = "https://rest.bandsintown.com/artists/"+bandName+"/events?app_id="+bands.id;
-       // jQuery short hand for ajax function  - passes database return to function through "data"
-       // returns an array of band tourdates/locations
-     $.get(queryURL, function(data){
-            // add lat and long as a data attr to the div element
-            for(var i = 0; i<data.length; i++){
-            
-                var wrap = $('<div>').addClass('show-wrap');
-                var lat = data[i].venue.latitude;
-                var long = data[i].venue.longitude;
-                var ll  = lat+","+long;
-                wrap.attr('data-ll', ll);
-
-                var date = data[i].datetime;
-                // moment.js
-                var dateFormat = moment(date).format('MMMM Do YYYY, h:mm:ss a'); 
-                var venue = $('<p>').text(data[i].venue.name);
-                var showdate = $('<p>').text(dateFormat);
-                var cityCountry = $('<p>').text(data[i].venue.city+", "+data[i].venue.country);
-                var btn = $('<button>').text('select show').addClass('select');
-                $(wrap).append(venue, showdate, cityCountry, btn);
-                // fancy schmancy thing tutor showed me -- not necessary - makes the search field dissapear and slide up over it
-                $('#band-search-form').slideUp('slow');
-                $('#band-results').append(wrap);
-            }
-        
-        })
+    var hfdData = {
+        searchterm:  localStorage.getItem("current-search"),
+        lat: localStorage.getItem("event-lat"),
+        lng: localStorage.getItem("event-long"),
+        ll: null
     }
 
-    // on click of select of a venue 
-    $('#band-results').on('click', '.select', function(){
-        // ROBERT --> THIS IS WHERE THE LONGITUDE & LATITUDE VALUES ARE PASSED TO THIS FUCNTION TO TRIGGER QUERIES TO HOTEL, FOOD, & DRINK - these values are stored in div here in the test html to display the band tour dates -- so the variable is outside the function -- see line 18, 24, 25, 37.  "selectedShow" grabs them here (line 48) by referring to the "parent" of this div with class of "show-wrap", (line 21) to use it in the following queries.  You can do the same thing with the div to display the band tour dates in your html.
+    // evaluate if lat and long are null
+    // if either are null user has not set values by selecting a event
+    // redirect user home to select an event
+    if(hfdData.lat === null || hfdData.long === null || hfdData.searchterm === null){
+        window.location.href = "index.html"
+    }else {
+        hfdData.ll = hfdData.lat +","+ hfdData.lng; 
+    }       
+    
+    // turnary operator
+    // (hfdData.lat === null || hfdData.long === null || hfdData.searchterm === null)? 
+    //     window.location.href = "index.html" 
+    //  : 
+    //      hfdData.ll = hfdData.lat +","+ hfdData.lng
+   
 
-        // get the slected buttons parent div data attr which holds the venues lat and long value
-        var selectedShow = $(this).parents('.show-wrap');
-        
-        // save lat and long to a variable
-        var ll = selectedShow.data('ll');
-        // hide the button of selected venue
-        $(this).hide();
+    $('#list-hotels').on('click', function(){
+        searchHotels(hfdData.ll);
+        clearDisplay(); 
+        showLoading();
+        setTimeout(function(){ 
+            $('#loading').empty()
+            $('#hotel-display').slideDown("slow");
+        }, 1000);
+    })
+   
+    $('#list-restaurants').on('click', function(){
+        searchFood(hfdData.ll);
+        clearDisplay(); 
+        showLoading();
+        setTimeout(function(){ 
+            $('#loading').empty()
+            $('#restaurant-display').slideDown("slow");
+        }, 1000);
+    })
 
-        // highlight the selected venue
-        selectedShow.addClass('selected-show');
+    $('#list-bars').on('click', function(){
+        searchDrinks(hfdData.ll);
+        clearDisplay();
+        showLoading(); 
+        setTimeout(function(){ 
+            $('#loading').empty()
+            $('#bar-display').slideDown("slow");
+        }, 1000);
+    })
 
-        // hide the other venue options (to do) hide all the divs with the class show-wrap except the one which is selected selected-show
-       
-        // search for hotels pass lat and long variable
-        searchHotels(ll);
-        // serch for food pass lat and long variable
-        searchFood(ll);
-        // search for drinks pass lat and long variable
-        searchDrinks(ll);
-    });
+    function clearDisplay(){
+        $('#loading, #hotel-display, #all-display, #restaurant-display, #bar-display').empty();
+    }
+    
+    // create loading image and test
+    function showLoading(){
+        var wrap = $('<div>').addClass('loading');
+        var h2 = $('<h2>').text('Loading....');
+        var img = $('<img>').attr('src', 'https://loading.io/spinners/wave/lg.wave-ball-preloader.gif').attr('alt', 'loading...');
+
+        $(wrap).append(h2,img);
+
+        $("#loading").append(wrap)
+    }
 
     // search foursquare api for hotels - 5 results 
     function searchHotels(ll){
-        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id="+foursquare.clientId+"&client_secret="+foursquare.clientSecret +"&ll="+ ll + "&query=hotels&limit=5&v=20180206"
-
+        console.log("in",ll)
+        // foursquare.clientId & foursquare.clientSecret live in keys.js which is listed about this file so you are able to access the objects
+        var queryURL = "https://api.foursquare.com/v2/venues/search?client_id="+foursquare.clientId+"&client_secret="+foursquare.clientSecret +"&ll="+ ll + "&query=hotels&limit=8&v=20180206";
+        
+        // // .get is short hand for .ajax  see links below
+        // // https://stackoverflow.com/questions/3870086/difference-between-ajax-and-get-and-load
+        // // http://api.jquery.com/jquery.ajax/
         $.get(queryURL, function(results){
-            console.log(results);
-            // stingify just for demo of showing json get rid of this when looping over results
-            var data = JSON.stringify(results.response);
-            $('#hotel-wrap .data-dump').append(data);
+            var data =  results.response.venues;
+            for(var i = 0; i < data.length;i++){
+               
+        
+                var wrap = $('<div>').addClass('hotel-card');
+                var addr = data[i].location.formattedAddress.join(",")
+                var map = "<iframe width='300' height='300' frameborder='0'  scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q="+encodeURIComponent( addr ) +  
+                "&amp;output=embed'></iframe>";  
+                $(wrap).html(map);
 
-            // for(var i = 0; i< data.length;i++){
-            //     // look at the structure of the data
-            //     // display what u want
-            //     // ie address, phone, price range, name ect
-            //     // create html
-            //     // add it to the page
-            // }
+                var latlong = data[i].location.lat + "," + data[i].location.lng
+                wrap.attr('data-fsqHid', data[i].id).attr('data-fsqHlatlng', latlong)
+    
+                var name = $('<h5>').text(data[i].name);
+                var address = $('<p>').text(addr);
+                $(wrap).append(name, address);
+                $('#hotel-display').append(wrap)
+            }
         })
     }
 
     // search foursquare api for restuarnts - 5 results 
     function searchFood(ll){
-        
+        // foursquare.clientId & foursquare.clientSecret live in keys.js which is listed about this file so you are able to access the objects
         var queryURL = "https://api.foursquare.com/v2/venues/search?client_id="+foursquare.clientId+"&client_secret="+foursquare.clientSecret +"&ll="+ ll + "&query=restuarant&limit=5&v=20180206"
+        
+        //.get is short hand for .ajax  see links below
+        //https://stackoverflow.com/questions/3870086/difference-between-ajax-and-get-and-load
+        //http://api.jquery.com/jquery.ajax/
         $.get(queryURL, function(results){
-            var data = JSON.stringify(results.response);
-            console.log();
-            $('#food-wrap .data-dump').append(data);
+            var data =  results.response.venues;
+            for(var i = 0; i < data.length;i++){
+                // console.log("food", data[i])
+                var wrap = $('<div>').addClass('food-card');
+
+                var addr = data[i].location.formattedAddress.join(",")
+                var map = "<iframe width='300' height='300' frameborder='0'  scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q="+encodeURIComponent( addr ) +  
+                "&amp;output=embed'></iframe>";  
+                $(wrap).html(map);
+
+                var latlong = data[i].lat + "," + data[i].lng
+                wrap.data('fsqFid', data[i].id).data('fsqFlatlng', latlong)
+                var name = $('<h5>').text(data[i].name);
+                var cat = $('<p>').text(data[i].categories[0].name);
+                var address = $('<p>').text(data[i].location.formattedAddress.join(","));
+                $(wrap).append(name, cat, address);
+                $('#restaurant-display').append(wrap)
+            }
         })
     }
 
     // search foursquare api for bars -  5 results 
     function searchDrinks(ll){
+        // foursquare.clientId & foursquare.clientSecret live in keys.js which is listed about this file so you are able to access the objects
         var queryURL = "https://api.foursquare.com/v2/venues/search?client_id="+foursquare.clientId+"&client_secret="+foursquare.clientSecret +"&ll="+ ll + "&query=bars&limit=5&v=20180206"
+        
+        // .get is short hand for .ajax  see links below
+        // https://stackoverflow.com/questions/3870086/difference-between-ajax-and-get-and-load
+        // http://api.jquery.com/jquery.ajax/
         $.get(queryURL, function(results){
-            var data = JSON.stringify(results.response);
-            console.log();
-            $('#drink-wrap .data-dump').append(data);
+            var data =  results.response.venues;
+            for(var i = 0; i < data.length;i++){
+                // console.log("drink", data[i])
+                var wrap = $('<div>').addClass('drink-card');
+
+                var addr = data[i].location.formattedAddress.join(",")
+                var map = "<iframe width='300' height='300' frameborder='0'  scrolling='no' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?&amp;q="+encodeURIComponent( addr ) +  
+                "&amp;output=embed'></iframe>";  
+                $(wrap).html(map);
+                
+                var latlong = data[i].lat + "," + data[i].lng
+                wrap.data('fsqDid', data[i].id).data('fsqDlatlng', latlong)
+                var name = $('<h5>').text(data[i].name);
+                var cat = $('<p>').text(data[i].categories[0].name);
+                var address = $('<p>').text(data[i].location.formattedAddress.join(","));
+                $(wrap).append(name, cat, address);
+                $(' #bar-display').append(wrap)
+            }
         })
+    }
+
+    function getVenueImage(id){
+        var queryURL = "https://api.foursquare.com/v2/venues/"+id + "/photos?client_id="+foursquare.clientId+"&client_secret="+foursquare.clientSecret + "&v=20180206";
+        $.get(queryURL, function(data){
+            if(data.response.photos.items.length > 0) {
+                var photoPrefix = data.response.photos.items[0].prefix;
+                var photoSize = "200x200";
+                var photoSuffix = data.response.photos.items[0].suffix;
+                var photoURL = photoPrefix + photoSize + photoSuffix;
+                // console.log(photoURL)
+                return photoURL
+            }else {
+                return ""
+            }
+            
+        });
     }
 });
 

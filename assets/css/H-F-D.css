@@ -1,7 +1,123 @@
+body {
+    font-family: Lato;
+    background: #000;
+    color: #fff;
+}
+#bands-wraps {
+    /* background: url(https://images.unsplash.com/photo-1473646590311-c48e1bc77b44?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80) fixed no-repeat; */
+    background-size: cover;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    background-color: #000;
+}
+#bands-wraps h1 {
+    text-align: center;
+    font-family: Lato;
+    font-size: 4em;
+    /* background: #111; */
+    text-align: center;
+}
+#bands-wraps h2 {
+    color: #3ef4f4;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 5%;
+
+}
+
+#bands-wraps .overlay {
+    width: 100%;
+    padding: 4rem 2rem;
+    margin: 0;
+    background: rgba(0, 0, 0, .4);
+}
+#band-search-form {
+    width: 55%;
+    margin: 5% auto;
+}
+
+#band-search-form label {
+    color: #fff;
+    font-size: 1.5em;
+}
+button, .btn .btn-default {
+    background: transparent;
+    border: 1px solid #3ef4f4 !important;
+    color: #3ef4f4;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+button:hover, .btn .btn-default:hover {
+    background-color: #3ef4f4;
+    border: 1px solid #3ef4f4;
+    color: #fff;
+}
+
+button.btn.btn-blu {
+    background-color: #3ef4f4;
+    border: 1px solid #3ef4f4;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+button.btn.btn-blu:hover {
+    background: transparent;
+    border: 1px solid #3ef4f4 !important;
+    color: #3ef4f4;
+}
+
+#results {
+    /* background: url('../img/hypnotize.png') repeat fixed; */
+    min-height: 350px;
+}
+#results .overlay {
+    width: 100%;
+    padding: 4rem 0;
+    margin: 0;
+    background: rgba(0, 0, 0, .7);
+    min-height: 350px;
+}
+
+#results h2 {
+    color: rgb(255, 124, 2);
+}
+
 .selected-show {
-    border: 1px solid red;
+   margin: auto !important;
 }
 .show-wrap {
-    display:inline-block;
-    border:1px solid #ccc;
+    text-align: center;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+.hide {
+    display: none;
+}
+#btn-wrapper {
+    text-align: center;
+    margin-top: 2%;
+}
+#btn-wrapper .btn {
+    margin-left: 5px;
+    margin-right:5px;
+}
+
+.hotel-card, 
+.food-card, 
+.drink-card {
+    background: #fff;
+    color: #000;
+    margin: 10px;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 10px;
+}
+.hotel-card h4,
+.food-card h4,
+.drink-card h4 {
+    font-weight: bold;
 }

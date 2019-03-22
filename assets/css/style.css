@@ -22,6 +22,9 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+img {
+  max-width: 100%;
+}
 .bg {
 /* The image used */
   background-color: black;
@@ -78,3 +81,25 @@ body {
   background:lightyellow;
 }
 
+.hide {
+  display: none;
+}
+
+.hotel-card, 
+.food-card, 
+.drink-card {
+    background: #fff;
+    color: #000;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    text-align: center;
+}
+.hotel-card h4,
+.food-card h4,
+.drink-card h4 {
+    font-weight: bold;
+}

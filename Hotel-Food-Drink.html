@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--This test environment for running this code for the Hotel, Food, and Drink module for the  selected tour date includes the css and js files on lines 11, 46, and 47 -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Scriible API Test Env</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100&effect=neon">
     <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/H-F-D.css" />
 </head>
 <body>
-    <div class="container">
-        <div id="bands-wraps">
-            <form id="band-search-form">
-                <div class="form-group">
-                    <label for="brand-name">Search a Band By Name:</label>
-                    <input type="text" class="form-control" id="brand-name" required placeholder="band name">
+    <div class="content">
+        <div class="jumbotron" id="bands-wraps">
+            <div class="overlay">
+                <div class="container">
+                    <h2 class="font-effect-neon" id="search-term"></h2>
                 </div>
-                <button type="submit" class="btn btn-default" id="search-band">Submit</button>
-            </form>
-            <div id="band-results"></div>
+            </div>
         </div>
-        <div id="hotel-wrap" class="col-lg-6 col-sm-12">
-            <h3>Hotel</h3>
+        
+        <div id="loading" align="center"></div>
 
-            <div class="data-dump"></div>
-        </div>
-        <div id="food-wrap" class="col-lg-6 col-sm-12">
-            <h3>Food</h3>
-            <div class="data-dump"></div>
-        </div>
-        <div id="drink-wrap" class="col-lg-6 col-sm-12">
-            <h3>Drink</h3>
-            <div class="data-dump"></div>
-        </div>
+        <section id="results">
+            <div class="overlay">
+                <div class="container">
+                    <div class="hide" id="attraction-wrap">
+                        <div id="hotel-wrap">
+                            <h2>Four Square Hotel</h2>
+                            <div class="hotel-data"></div>
+                        </div>
+                        <hr/>
+                        <div id="food-wrap">
+                            <h2>Four Square food</h2>
+                            <div class="food-data"></div>
+                        </div>
+                        <hr/>
+                        <div id="drink-wrap">
+                            <h2>Four Square drink</h2>
+                            <div class="drink-data"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <!-- script files live here -->
     <script

@@ -123,19 +123,30 @@
           <div class="card-body">
 
             <!-- Form for handling the hotels, restaurants, bars lists-->
-            <form role="form">
-
+           
               <!-- Search button -->
-              <button type="submit" class="btn btn-default" id="list-hotels">
-                <i class="fa fa-hotel"></i> Hotels</button>
+              <section>
+                <button type="submit" class="btn btn-default" id="list-hotels">
+                    <i class="fa fa-hotel"></i> Hotels</button>
+    
+                  <button class="btn btn-default" id="list-restaurants">
+                    <i class="fa fa-cutlery"></i>  Restaurants</button>
+    
+                  <button class="btn btn-default" id="list-bars">
+                    <i class="fa fa-glass"></i>  Bars</button>     
+              </section>
+             <hr/>
+              <br/>
+            <div id="loading"></div>
 
-              <button class="btn btn-default" id="list-restaurants">
-                <i class="fa fa-cutlery"></i>  Restaurants</button>
+            <div class="hide" id="hotel-display" >
+            </div>
 
-              <button class="btn btn-default" id="list-bars">
-                <i class="fa fa-glass"></i>  Bars</button>
-               
-            </form>
+            <div class="hide" id="restaurant-display" >
+            </div>
+    
+            <div class="hide" id="bar-display" >
+            </div>
         
           </div>
         </div>
@@ -157,14 +168,9 @@
 
           <!-- This card will hold the hotels, restuarants bars lists; Ric's API results should display here -->
           
-          <div class="d-flex align-content-center flex-wrap" id="hotel-display" >
-          </div>
+          
 
-          <div class="d-flex align-content-center flex-wrap" id="restaurant-display" >
-          </div>
-
-          <div class="d-flex align-content-center flex-wrap" id="bar-display" >
-          </div>
+         
 
         </div>
       </div>
@@ -193,8 +199,12 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
   <!-- Code to the JavaScript File -->
+  <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script> -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAkNHDnrQY-JqtW1a2kK9ngWrGh3HPjYU"
+  type="text/javascript"></script>
+  <script src="assets/javascript/keys.js"></script>
   <script src="assets/javascript/logic.js"></script>
-
+  <script src="assets/javascript/H-F-D.js"></script>
 </body>
 
 </html>
