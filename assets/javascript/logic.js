@@ -1,14 +1,23 @@
 $(document).ready(function() {
 
 //THIS FUNCTIN IS FOR THE DETAILS PAGE BUT A LOG WILL BE IN ANY PAGE'S CONSOLE
-    detailsPage();
+var searchTerm = localStorage.getItem("current-search");
+
+eventSearch(searchTerm);
+detailsPage();
 
 $("#run-search").on("click", function(event){ 
     event.preventDefault();
     
-    var searchTerm = $("#search-term").val().trim();
+    searchTerm = $("#search-term").val().trim();
+    localStorage.setItem("current-search", searchTerm);
+    
     eventSearch(searchTerm);
 });
+
+$("#clear-all").on("click", function(){
+    localStorage.removeItem("current-search");
+})
     // TICETMASTER API CALL
 function eventSearch (searchTerm) {
     var queryURL = "https://app.ticketmaster.com/discovery/v2/events?keyword=" + searchTerm + "&apikey=qDmaWBTfNnhcNqUaYnYfuEl5K1xVPlxR&countryCode=US";
