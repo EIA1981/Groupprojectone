@@ -56,9 +56,14 @@ function eventsResult (results) {
         var date = $("<p>").html(eventObject.date);
         var city = $("<p>").html(eventObject.city + ", " + eventObject.state);
         var image = $("<img>").attr("src", eventObject.image);
-        var info = $("<p>").html(eventObject.info);
 
-        image.attr("style", "width: 300px");
+        // info line
+        var info = $("<p>").html(eventObject.info);
+        // change info width
+        info.attr("style", "width: 300px"); 
+
+        // possibly change width of images, but may appear too big in details page
+        image.attr("style", "width: 600px"); 
 
         var eventDiv = $("<div>"); // THIS IS THE DIV FOR EACH EVENT RESULT
         var eventDisplay = $("#display");
