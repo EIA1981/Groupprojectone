@@ -86,6 +86,10 @@ $(document).ready(function() {
                 eventDiv.append(city);
                 eventDiv.append(info);
 
+            // Populates the resutls fom the index page in rows
+            $("#display").append("<div class='well'><span> " + " </span></div>");
+
+
     // SELECT AN EVENT
         eventInfo(eventDiv, eventObject);      
         }
