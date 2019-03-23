@@ -103,3 +103,7 @@ img {
 .drink-card h4 {
     font-weight: bold;
 }
+
+img {
+  width: 400px;
+}
